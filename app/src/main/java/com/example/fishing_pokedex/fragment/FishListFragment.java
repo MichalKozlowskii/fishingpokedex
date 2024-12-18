@@ -10,8 +10,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.fishing_pokedex.R;
 import com.example.fishing_pokedex.entity.Fish;
 import com.example.fishing_pokedex.viewmodel.FishListViewModel;
 import com.example.fishing_pokedex.databinding.FragmentFishListBinding;
@@ -36,6 +38,8 @@ public class FishListFragment extends Fragment {
                 position -> {
                     Bundle args = new Bundle();
                     args.putInt("position", position);
+
+                    Navigation.findNavController(requireView()).navigate(R.id.action_fishListFragment_to_fishFragment, args);
                 });
 
         binding.rvList.setAdapter(adapter);
