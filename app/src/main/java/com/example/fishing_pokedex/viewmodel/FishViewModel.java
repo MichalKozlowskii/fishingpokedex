@@ -9,6 +9,9 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import dagger.hilt.android.lifecycle.HiltViewModel;
+
+@HiltViewModel
 public class FishViewModel {
     private final FishRepository repository;
 
@@ -28,4 +31,6 @@ public class FishViewModel {
     public void update(Fish fish) {
         repository.update(fish);
     }
+
+
 }
