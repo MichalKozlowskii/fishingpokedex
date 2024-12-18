@@ -7,5 +7,17 @@
     <fragment
         android:id="@+id/fishListFragment"
         android:name="com.example.fishing_pokedex.fragment.FishListFragment"
-        android:label="FishListFragment" />
+        android:label="FishListFragment" >
+        <action
+            android:id="@+id/action_fishListFragment_to_fishFragment"
+            app:destination="@id/fishFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fishFragment"
+        android:name="com.example.fishing_pokedex.fragment.FishFragment"
+        android:label="FishFragment" >
+        <action
+            android:id="@+id/action_fishFragment_to_fishListFragment"
+            app:destination="@id/fishListFragment" />
+    </fragment>
 </navigation>
