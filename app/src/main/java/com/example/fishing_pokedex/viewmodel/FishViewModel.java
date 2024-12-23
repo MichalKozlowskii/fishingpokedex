@@ -25,13 +25,7 @@ public class FishViewModel extends ViewModel {
         return repository.getFishList();
     }
 
-    public void insert(Fish fish) {
-        repository.insert(fish);
-    }
-
     public void update(Fish fish) {
         repository.update(fish);
     }
-
-
 }

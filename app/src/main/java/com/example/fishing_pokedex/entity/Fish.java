@@ -9,7 +9,7 @@ import java.util.Objects;
 public class Fish {
     @PrimaryKey(autoGenerate = true)
     private int id;
-    
+
     private String name;
     private double weight;
     private boolean isCaught;
