@@ -1,4 +1,4 @@
-package com.example.fishing_pokedex.room;
+package com.example.fishing_pokedex.db;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;

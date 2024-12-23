@@ -1,4 +1,4 @@
-package com.example.fishing_pokedex.room;
+package com.example.fishing_pokedex.db;
 
 import androidx.room.Database;
 import androidx.room.RoomDatabase;

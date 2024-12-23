@@ -5,8 +5,8 @@ import android.content.Context;
 import androidx.room.Room;
 
 import com.example.fishing_pokedex.migration.Migration1To2;
-import com.example.fishing_pokedex.room.FishDao;
-import com.example.fishing_pokedex.room.FishDatabase;
+import com.example.fishing_pokedex.db.FishDao;
+import com.example.fishing_pokedex.db.FishDatabase;
 
 import javax.inject.Singleton;
 
