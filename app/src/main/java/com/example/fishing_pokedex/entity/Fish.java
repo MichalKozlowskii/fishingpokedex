@@ -11,11 +11,11 @@ public class Fish {
     private int id;
 
     private String name;
-    private double weight;
+    private Double weight;
     private boolean isCaught;
     private String photoPath;
 
-    public Fish(String name, double weight, boolean isCaught, String photoPath) {
+    public Fish(String name, Double weight, boolean isCaught, String photoPath) {
         this.name = name;
         this.weight = weight;
         this.isCaught = isCaught;
@@ -38,7 +38,7 @@ public class Fish {
         this.name = name;
     }
 
-    public double getWeight() {
+    public Double getWeight() {
         return weight;
     }
 
