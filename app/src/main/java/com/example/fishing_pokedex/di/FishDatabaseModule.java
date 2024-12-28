@@ -7,6 +7,7 @@ import androidx.room.Room;
 import com.example.fishing_pokedex.migration.Migration1To2;
 import com.example.fishing_pokedex.db.FishDao;
 import com.example.fishing_pokedex.db.FishDatabase;
+import com.example.fishing_pokedex.migration.Migration2To3;
 
 import javax.inject.Singleton;
 
@@ -24,6 +25,7 @@ public class FishDatabaseModule {
     public FishDatabase provideFishDatabase(Context context) {
         return Room.databaseBuilder(context, FishDatabase.class, "fish_table")
                 .addMigrations(new Migration1To2())
+                .addMigrations(new Migration2To3())
                 .build();
     }
 
