@@ -60,11 +60,9 @@ public class FishFragment extends Fragment {
                     }
                 }
                 if (allGranted) {
-                    Log.d("PERMISSIONS", "All permissions granted");
                     openCamera();
                 } else {
-                    Log.d("PERMISSIONS", "Permissions denied");
-                    // Handle permissions denied scenario, e.g., show a message to the user.
+                    binding.permissionsTextView.setVisibility(View.VISIBLE);
                 }
             });
 

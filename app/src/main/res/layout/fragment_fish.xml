@@ -38,11 +38,22 @@
             android:id="@+id/fishPhoto"
             android:layout_width="match_parent"
             android:layout_height="200dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="140dp"
+            android:background="@android:color/darker_gray"
             android:contentDescription="photo of fish"
-            android:scaleType="centerCrop"
-            android:background="@android:color/darker_gray" />
+            android:scaleType="centerCrop" />
 
         <!-- Przycisk do zrobienia zdjęcia -->
+
+        <TextView
+            android:id="@+id/permissionsTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
+            android:gravity="center_horizontal"
+            android:text="Zezwól na wszystkie permisje w ustawieniach!"
+            android:visibility="invisible" />
 
         <EditText
             android:id="@+id/weightTextEntry"
