@@ -3,7 +3,9 @@ package com.example.fishing_pokedex.fragment;
 import static android.app.Activity.RESULT_OK;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -17,6 +19,8 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -33,6 +37,7 @@ import java.util.Locale;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
+@RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
 @AndroidEntryPoint
 public class FishFragment extends Fragment {
     private FragmentFishBinding binding;
@@ -40,6 +45,28 @@ public class FishFragment extends Fragment {
     private Fish fish;
     private String currentPhotoPath;
     private Double currentWeight;
+
+    private static final String[] REQUIRED_PERMISSIONS = {
+            android.Manifest.permission.CAMERA,
+            android.Manifest.permission.READ_MEDIA_IMAGES
+    };
+    ActivityResultLauncher<String[]> requestPermissionsLauncher =
+            registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(), result -> {
+                boolean allGranted = true;
+                for (Boolean granted : result.values()) {
+                    if (!granted) {
+                        allGranted = false;
+                        break;
+                    }
+                }
+                if (allGranted) {
+                    Log.d("PERMISSIONS", "All permissions granted");
+                    openCamera();
+                } else {
+                    Log.d("PERMISSIONS", "Permissions denied");
+                    // Handle permissions denied scenario, e.g., show a message to the user.
+                }
+            });
 
     ActivityResultLauncher<Intent> takePictureLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
@@ -52,6 +79,23 @@ public class FishFragment extends Fragment {
                 }
             }
     );
+
+    private void checkAndRequestPermissions() {
+        boolean allGranted = true;
+        for (String permission : REQUIRED_PERMISSIONS) {
+            if (ContextCompat.checkSelfPermission(requireContext(), permission)
+                    != PackageManager.PERMISSION_GRANTED) {
+                allGranted = false;
+                break;
+            }
+        }
+
+        if (allGranted) {
+            openCamera();
+        } else {
+            requestPermissionsLauncher.launch(REQUIRED_PERMISSIONS);
+        }
+    }
 
     @Nullable
     @Override
@@ -78,7 +122,7 @@ public class FishFragment extends Fragment {
                 if (currentWeight < 0) return;
 
                 Log.d("DEBUG", "Capture button clicked");
-                openCamera();
+                checkAndRequestPermissions();
             });
         }
 
@@ -132,9 +176,9 @@ public class FishFragment extends Fragment {
         String imageFileName = "JPEG_" + timeStamp + "_";
         File storageDir = requireContext().getCacheDir();
         File image = File.createTempFile(
-                imageFileName, /* prefix */
-                ".jpg",        /* suffix */
-                storageDir     /* directory */
+                imageFileName,
+                ".jpg",
+                storageDir
         );
 
         return image;
